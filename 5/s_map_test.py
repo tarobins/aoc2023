@@ -37,13 +37,12 @@ def test_single_map():
     assert s.post_range([0, 10]) == [6, 4]
 
 def test_seed_map():
-    map1 = s_map.seed_map([[50, 98, 2], [52, 50, 48]])
+    seed_to_soil = s_map.seed_map([[50, 98, 2], [52, 50, 48]])
     seeds = [79, 14, 55, 13]
 
-    
-    assert 
+    soil = seed_to_soil.map(seeds) 
 
-
+    assert soil == [81, 14, 57, 13]
 
 
 

@@ -84,7 +84,7 @@ class seed_map:
                 return submap[key]
         return key
 
-    def critical_range(self, critical_domain):
+    def map(self, critical_domain):
         unmapped = critical_domain.copy()
         mapped = []
         for submap in self.submaps:
@@ -100,37 +100,34 @@ class seed_map:
 
     
 def main(argv):
-    pass
-    # filename = argv[1]                    
-    # with open(filename, 'r') as f:
-    #     seeds = list(map(int, f.readline().split(':')[1].strip().split(' ')))
+    filename = argv[1]                    
+    with open(filename, 'r') as f:
+        seeds = list(map(int, f.readline().split(':')[1].strip().split(' ')))
         
         
-    #     seed_maps = []
-    #     f.readline() # skip blank line
-    #     while True:
-    #         f.readline() # skip header
-    #         next_line = f.readline()
-    #         # print(next_line)
-    #         # print(f' >>>> {len(next_line)}')
-    #         seed_to_soil_arrays = []
-    #         while len(next_line) > 0 and next_line[0].isdigit():
-    #             next_line = next_line.strip().split(' ')
-    #             seed_to_soil_arrays.append([int(next_line[0]), int(next_line[1]), int(next_line[2])])
-    #             next_line = f.readline()
+        seed_maps = []
+        f.readline() # skip blank line
+        while True:
+            f.readline() # skip header
+            next_line = f.readline()
+            # print(next_line)
+            # print(f' >>>> {len(next_line)}')
+            seed_to_soil_arrays = []
+            while len(next_line) > 0 and next_line[0].isdigit():
+                next_line = next_line.strip().split(' ')
+                seed_to_soil_arrays.append([int(next_line[0]), int(next_line[1]), int(next_line[2])])
+                next_line = f.readline()
             
-    #         seed_maps.append(seed_map(seed_to_soil_arrays))
+            seed_maps.append(seed_map(seed_to_soil_arrays))
 
-    #         if len(next_line) == 0:
-    #             break
+            if len(next_line) == 0:
+                break
     
-    # cd = seeds
-    # print(cd)
-    # for vseed_map in seed_maps:
-    #     cd = vseed_map.critical_range(cd)
-    #     print(cd)
-    
-    # print(cd)
+    cd = seeds
+    for vseed_map in seed_maps:
+        cd = vseed_map.map(cd)
+
+    print(min(cd[::2]))
 
 
 if __name__ == '__main__':
